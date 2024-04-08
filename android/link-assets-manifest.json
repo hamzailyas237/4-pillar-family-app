@@ -1,0 +1,65 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/AbrilFatface-Regular.ttf",
+      "sha1": "545553bf8733c6edc2846ba1b420f19e4a6ff2de"
+    },
+    {
+      "path": "assets/fonts/Now-Black-BF6542f712baf72.otf",
+      "sha1": "3db72eb785d38c1562f05d79688da49c83a9a860"
+    },
+    {
+      "path": "assets/fonts/Now-Bold-BF6542f7138a8d2.otf",
+      "sha1": "d79abf00c013e2aed647538c653444956ba1cc6c"
+    },
+    {
+      "path": "assets/fonts/Now-ExtraBold-BF6542f713848e0.otf",
+      "sha1": "d084c5beb6a04e07aa73e30febc1034a062e5a38"
+    },
+    {
+      "path": "assets/fonts/Now-ExtraLight-BF6542f7138edb2.otf",
+      "sha1": "55d0f04e9e4ffc5037cc9a07e9661e497ed26be3"
+    },
+    {
+      "path": "assets/fonts/Now-Light-BF6542f7137fce2.otf",
+      "sha1": "2ef80a75cd5a6cb952836980b154e632a2f185e9"
+    },
+    {
+      "path": "assets/fonts/Now-Medium-BF6542f7137648d.otf",
+      "sha1": "dad0eabb39938707dee7d2da12de9e6c91ddd4b4"
+    },
+    {
+      "path": "assets/fonts/Now-Regular-BF6542f7138c477.otf",
+      "sha1": "5aee75d49e05d4ab7db5fd061be34f508ed82c7f"
+    },
+    {
+      "path": "assets/fonts/Now-SemiBold-BF6542f713451c6.otf",
+      "sha1": "c533f50f06ca368daa49cf49e0bc5500e44ff9bc"
+    },
+    {
+      "path": "assets/fonts/Now-Thin-BF6542f71390851.otf",
+      "sha1": "11cc9326b92790e5d62bf70ca849aa0690eb3ecf"
+    },
+    {
+      "path": "assets/fonts/Quicksand-Bold.ttf",
+      "sha1": "07ca4486c80653a7f3abc18145c2f251d5c9989b"
+    },
+    {
+      "path": "assets/fonts/Quicksand-Light.ttf",
+      "sha1": "0d6fe8746125375ffd3ea4de6ecf062643a65c52"
+    },
+    {
+      "path": "assets/fonts/Quicksand-Medium.ttf",
+      "sha1": "9cbdd6785519aa2d85ee58cb5101ea9dbff8652f"
+    },
+    {
+      "path": "assets/fonts/Quicksand-Regular.ttf",
+      "sha1": "ba6e4d47926d643a8a4b509b193b3a87c3ea385d"
+    },
+    {
+      "path": "assets/fonts/Quicksand-SemiBold.ttf",
+      "sha1": "1f5c9cf95379bef6cee5f2a7deb393b157c91f4e"
+    }
+  ]
+}

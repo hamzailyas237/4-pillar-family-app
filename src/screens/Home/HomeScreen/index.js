@@ -23,6 +23,7 @@ import RowBtnsHomeScreen from '../../../components/RowBtnsHomeScreen';
 import {rowBtns} from '../../../redux/slices';
 import {RadioButton} from 'react-native-paper';
 import axios from 'axios';
+import AppRadioButton from '../../../components/RadioButton/AppRadioButton';
 
 const HomeScreen = () => {
   const homeBtnImg2 = require('../../../assets/Images/homeBtnImg2.png');
@@ -334,7 +335,7 @@ const HomeScreen = () => {
 
             <View style={{marginTop: 5}} />
             <Text style={[styles.text2, {marginLeft: 6}]}>
-              Complete all afirmations & get{'\n'}1point
+              Complete all affirmations & get{'\n'}1point
             </Text>
             <View style={styles.radioBtnContainer}>
               <TouchableOpacity
@@ -342,13 +343,10 @@ const HomeScreen = () => {
             </View>
 
             <View style={{marginTop: 5, marginBottom: 5}}>
-              <Radiobtns
-                onPressbtn={() => setVisible(!visible)}
-                btn1
-                borderWidth={1}
-                backgroundColor={Colors.shadow1}
-                Easy="Start your day by waking up at the same"
-                Medium="Start your day by waking up at the same"
+              <AppRadioButton
+                text={'Start your day by waking up at the same'}
+                isChecked={true}
+                // radioType="completed"
               />
             </View>
 
@@ -367,7 +365,7 @@ const HomeScreen = () => {
               </Text>
             </View>
 
-            <View style={{}}>
+            <View>
               <Radiobtns
                 onPressbtn={() => setVisible(!visible)}
                 btn
@@ -379,7 +377,7 @@ const HomeScreen = () => {
               />
             </View>
             <View style={{marginTop: 10}} />
-            <View style={{}}></View>
+            <View></View>
             <View style={{marginTop: 10}}>
               <Text
                 style={[
@@ -407,7 +405,7 @@ const HomeScreen = () => {
                 See All
               </Text>
             </View>
-            <View style={{}}>
+            <View>
               <Radiobtns
                 onPressbtn={() => setVisible(!visible)}
                 btn1
@@ -434,7 +432,7 @@ const HomeScreen = () => {
               <Text style={[styles.seealltext]}>See All</Text>
             </View>
 
-            <View style={{}}>
+            <View>
               <Radiobtns
                 onPressbtn={() => setVisible(!visible)}
                 btn
@@ -459,7 +457,7 @@ const HomeScreen = () => {
               <Text style={[styles.seealltext]}>See All</Text>
             </View>
 
-            <View style={{}}>
+            <View>
               <Radiobtns
                 onPressbtn={() => setVisible(!visible)}
                 borderWidth={1}
@@ -482,7 +480,7 @@ const HomeScreen = () => {
               Completed
             </Text>
 
-            <View style={{}}>
+            <View>
               <Radiobtns
                 onPressbtn={() => setVisible(!visible)}
                 btn
@@ -505,7 +503,7 @@ const HomeScreen = () => {
               <Text style={[styles.seealltext]}>See All</Text>
             </View>
 
-            <View style={{}}>
+            <View>
               <Radiobtns
                 onPressbtn={() => setVisible(!visible)}
                 borderWidth={1}
@@ -528,7 +526,7 @@ const HomeScreen = () => {
               Completed
             </Text>
 
-            <View style={{}}>
+            <View>
               <Radiobtns
                 onPressbtn={() => setVisible(!visible)}
                 btn

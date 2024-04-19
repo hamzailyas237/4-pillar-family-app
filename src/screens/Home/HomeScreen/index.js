@@ -24,6 +24,7 @@ import {rowBtns} from '../../../redux/slices';
 import {RadioButton} from 'react-native-paper';
 import axios from 'axios';
 import AppRadioButton from '../../../components/RadioButton/AppRadioButton';
+import {fetchPoints} from '../../../redux/slices/PointsAndStreaksSlice';
 
 const HomeScreen = () => {
   const homeBtnImg2 = require('../../../assets/Images/homeBtnImg2.png');
@@ -31,11 +32,15 @@ const HomeScreen = () => {
   const graphImg = require('../../../assets/Images/graph.png');
   const homeBtnImg = require('../../../assets/Images/homeBtnImg.png');
   const navigation = useNavigation();
-  const userRole = useSelector(state => state?.auth?.userInfo);
-  const userInfo = useSelector(state => state.userInfo);
+  const userRole = useSelector(state => state?.user?.userInfo?.role);
+  // const userInfo = useSelector(state => state.userInfo);
+  const userInfo = useSelector(state => state?.user?.userInfo);
 
-  const writeGratitude = useSelector(state => state?.auth?.writeGrtitude.data);
-  const token = useSelector(state => state.token);
+  // const writeGratitude = useSelector(state => state?.auth?.writeGrtitude.data);
+  const writeGratitude = useSelector(state => state?.user?.writeGrtitude?.data);
+  // const token = useSelector(state => state.token);
+  const token = useSelector(state => state?.user?.token);
+
   const dispatch = useDispatch();
   const [gratitudeInput1, setGratitudeInput1] = useState(
     writeGratitude?.gratitudeInput1 || '',
@@ -43,13 +48,11 @@ const HomeScreen = () => {
   const [visible, setVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalSec, setModalSec] = useState(false);
-  const [id, setId] = useState(userInfo?.id || '');
-  const [points, setPoints] = useState(0);
   const [getPointsData, setGetPointsData] = useState(false);
 
   const [rowBtnsValues, setRowBtnsValues] = useState({
-    userId: id,
-    token: token,
+    userId: userInfo?._id,
+    token,
     faith1: false,
     faith2: false,
     family1: false,
@@ -59,17 +62,9 @@ const HomeScreen = () => {
     education: false,
     goals: false,
   });
-  console.log('goals=================> Line No. 48', rowBtnsValues?.faith1);
-  console.log('goals=================> Line No. 48', rowBtnsValues?.faith2);
-  console.log('goals=================> Line No. 48', rowBtnsValues?.family1);
-  console.log('goals=================> Line No. 48', rowBtnsValues?.family2);
-  console.log('goals=================> Line No. 48', rowBtnsValues?.fitness1);
-  console.log('goals=================> Line No. 48', rowBtnsValues?.fitness2);
-  console.log('goals=================> Line No. 48', rowBtnsValues?.education);
-  console.log('goals=================> Line No. 48', rowBtnsValues?.goals);
 
   const handleRowBtnsValues = values => {
-    setRowBtnsValues(values);
+    setRowBtnsValues({...values, userId: userInfo?._id, token});
     // dispatch(rowBtns(rowBtnsValues));
   };
 
@@ -92,26 +87,8 @@ const HomeScreen = () => {
     }
   }, [rowBtnsValues, dispatch]);
 
-  const getPoints = async () => {
-    try {
-      const response = await axios.get(
-        `https://4-pillar-backend.vercel.app/api/v1/points/get-points/${id}`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      console.log('🚀 ~ useEffect ~ response:', response?.data?.results);
-      setPoints(response?.data?.results);
-    } catch (error) {
-      console.log(error, 'njkhv');
-    }
-  };
-
   useEffect(() => {
-    getPoints();
+    dispatch(fetchPoints(userInfo?._id));
   }, [getPointsData]);
 
   useEffect(() => {
@@ -129,7 +106,7 @@ const HomeScreen = () => {
         source={Images.backgroundImages.BackgroundImage}
         resizeMode="cover"
         style={{flex: 1, backgroundColor: Colors.green}}>
-        <Header image={Images.user.userProfile} points={points} />
+        <Header image={Images.user.userProfile} />
 
         <ScrollView
           bounces={false}

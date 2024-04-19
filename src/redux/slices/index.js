@@ -38,11 +38,8 @@ export const loginUser = createAsyncThunk(
         // token,
       },
     );
-    console.log('responseLogin', response);
 
     const data = await response.json();
-    // console.log("apiDataLogin", data?.message);
-    console.log('data=========>', data);
 
     // const token = await data?.token;
     // console.log("🚀 ~ token:", token)
@@ -576,7 +573,8 @@ export const updateProfile = createAsyncThunk(
 
     // console.log("responseLogin", response)
     const data = await response.json();
-    // console.log("apiDataLogin", data?.message);
+    console.log('🚀 ~ data:', data);
+    console.log('apiDataLogin', data?.message);
     // console.log("==========================>",  data.token);
     if (!response.ok) {
       Toast.error(data?.message);
@@ -607,19 +605,6 @@ export const rowBtns = createAsyncThunk(
     },
     {rejectWithValue},
   ) => {
-    console.log(
-      'email,ReduexFile============================>',
-      userId,
-      token,
-      faith1,
-      faith2,
-      family1,
-      family2,
-      fitness1,
-      fitness2,
-      education,
-      goals,
-    );
     const config = {
       headers: {
         'Content-Type': 'application/json',

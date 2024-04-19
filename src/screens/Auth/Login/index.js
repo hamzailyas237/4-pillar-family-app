@@ -9,21 +9,21 @@ import {
   ActivityIndicator,
   TextInput,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 import Images from '../../../assets/Images';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-import { } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+import {} from 'react-native-paper';
+import {useSelector} from 'react-redux';
 import Modal from 'react-native-modal';
-import { loginUser, loginUserChild } from '../../../redux/slices';
-import { Toast } from 'toastify-react-native';
+import {loginUser, loginUserChild} from '../../../redux/slices';
+import {Toast} from 'toastify-react-native';
 
-const Login = ({ route }) => {
+const Login = ({route}) => {
   const backArrow = require('../../../assets/Images/arrowback3.png');
   const type = route.params?.usertType;
 
@@ -57,7 +57,7 @@ const Login = ({ route }) => {
 
   const onsubmit = () => {
     if (credentials.email.trim() !== '' && credentials.password.trim() !== '') {
-      dispatch(loginUser({ ...credentials, navigation }));
+      dispatch(loginUser({...credentials, navigation}));
       toggleModalSec();
       console.log('credentialsSucsses', credentials);
     } else {
@@ -67,7 +67,7 @@ const Login = ({ route }) => {
 
   const onsubmitChild = () => {
     if (credentials.email.trim() !== '' && credentials.password.trim() !== '') {
-      dispatch(loginUserChild({ ...credentials, navigation }));
+      dispatch(loginUserChild({...credentials, navigation}));
       toggleModalSec();
       console.log('credentialsSucsses', credentials);
     } else {
@@ -80,7 +80,7 @@ const Login = ({ route }) => {
       <ImageBackground
         source={Images.backgroundImages.BackgroundImage}
         resizeMode="cover"
-        style={{ flex: 1 }}>
+        style={{flex: 1}}>
         <View
           style={{
             flexDirection: 'row',
@@ -94,7 +94,7 @@ const Login = ({ route }) => {
           </TouchableOpacity>
           {type == 'parent' && (
             <TouchableOpacity
-              style={{ marginRight: 26, alignSelf: 'flex-end' }}
+              style={{marginRight: 26, alignSelf: 'flex-end'}}
               onPress={() => navigation.navigate('Login')}>
               <Text
                 style={{
@@ -113,12 +113,12 @@ const Login = ({ route }) => {
           enableAutomaticScroll={true}
           bounces={false}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ flexGrow: 1 }}>
-          <View style={{ marginTop: 5 }} />
+          contentContainerStyle={{flexGrow: 1}}>
+          <View style={{marginTop: 5}} />
           <Text style={styles.headtext}>Login</Text>
 
-          <View style={{ paddingTop: 20, paddingHorizontal: 15 }}>
-            <View style={{ marginTop: 8 }}>
+          <View style={{paddingTop: 20, paddingHorizontal: 15}}>
+            <View style={{marginTop: 8}}>
               <View style={[styles.inputContainer]}>
                 <TextInput
                   style={styles.inputField}
@@ -164,11 +164,11 @@ const Login = ({ route }) => {
             </TouchableOpacity>
 
             {type == 'child' && (
-              <TouchableOpacity onPress={onsubmitChild} style={{ marginTop: 26 }}>
+              <TouchableOpacity onPress={onsubmitChild} style={{marginTop: 26}}>
                 <LinearGradient
                   colors={['#BA5DFE', '#5D36FE']}
-                  start={{ x: 0.2, y: 0.25 }}
-                  end={{ x: 0.9, y: 2.0 }}
+                  start={{x: 0.2, y: 0.25}}
+                  end={{x: 0.9, y: 2.0}}
                   style={styles.linear}>
                   <Text
                     style={{
@@ -184,11 +184,11 @@ const Login = ({ route }) => {
             )}
 
             {type == 'parent' && (
-              <TouchableOpacity onPress={onsubmit} style={{ marginTop: 26 }}>
+              <TouchableOpacity onPress={onsubmit} style={{marginTop: 26}}>
                 <LinearGradient
                   colors={['#BA5DFE', '#5D36FE']}
-                  start={{ x: 0.2, y: 0.25 }}
-                  end={{ x: 0.9, y: 2.0 }}
+                  start={{x: 0.2, y: 0.25}}
+                  end={{x: 0.9, y: 2.0}}
                   style={styles.linear}>
                   <Text
                     style={{

@@ -32,7 +32,11 @@ const Header = props => {
   const drawerIcon = require('../../assets/Images/drawericon.png');
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
-  const userInfo = useSelector(state => state?.userInfo);
+  // const userInfo = useSelector(state => state?.userInfo);
+  const userInfo = useSelector(state => state?.user?.userInfo);
+  // const token = useSelector(state => state.token);
+  const token = useSelector(state => state?.user?.token);
+  const points = useSelector(state => state?.points?.points);
 
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
@@ -48,27 +52,6 @@ const Header = props => {
   const onsubmit = () => {
     dispatch(logoutUser());
   };
-
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `https://4-pillar-backend.vercel.app/api/v1/points/get-points/${id}`,
-  //           {
-  //             headers: {
-  //               'Content-Type': 'application/json',
-  //               Authorization: `Bearer ${token}`,
-  //             },
-  //           },
-  //         );
-  //         console.log('🚀 ~ useEffect ~ response:', response?.data?.results);
-  //         setPoints(response?.data?.results);
-  //       } catch (error) {
-  //         console.log(error, 'njkhv');
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []); // Empty dependency array means this effect runs once on mount
 
   return (
     <>
@@ -125,7 +108,7 @@ const Header = props => {
             <Text style={[styles.counttext, {fontSize: 16}]}>Home</Text>
             <View style={styles.boderView} />
             <DimondIcon />
-            <Text style={styles.counttext}>{props?.points} Pts</Text>
+            <Text style={styles.counttext}>{points} Pts</Text>
 
             <View style={styles.boderView} />
             <FireICon />

@@ -3,8 +3,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 const pointsSlice = createSlice({
   name: 'points',
   initialState: {
-    streaks: 0,
-    points: 0,
+    data: {},
   },
   extraReducers: builder => {
     builder.addCase(fetchPoints.pending, (state, action) => {
@@ -14,8 +13,9 @@ const pointsSlice = createSlice({
     builder.addCase(fetchPoints.fulfilled, (state, action) => {
       // console.log(action, state)
       // state.status = STATUSES.IDLE
-      state.points = action.payload?.totalCompletedPoints;
-      state.streaks = action.payload?.streaks;
+      state.data = action.payload;
+      // state.points = action.payload?.totalCompletedPoints;
+      // state.streaks = action.payload?.streaks;
     });
     builder.addCase(fetchPoints.rejected, (state, action) => {
       // console.log(action, state)
@@ -30,7 +30,7 @@ export const fetchPoints = createAsyncThunk('points/fetch', async id => {
   );
   // console.log('pointsData ==> ', pointsData);
   const points = await pointsData.json();
-  // console.log('points ==> ', points?.data?.pointsData[0]);
+  console.log('points ==> ', points?.data?.pointsData[0]);
   return points?.data?.pointsData[0];
 });
 

@@ -40,6 +40,11 @@ const HomeScreen = () => {
   const writeGratitude = useSelector(state => state?.user?.writeGrtitude?.data);
   // const token = useSelector(state => state.token);
   const token = useSelector(state => state?.user?.token);
+  const selectedRowBtnsValues = useSelector(state => state?.points?.data);
+  console.log(
+    '🚀 ~ HomeScreen ~ selectedRowBtnsValues:',
+    selectedRowBtnsValues,
+  );
 
   const dispatch = useDispatch();
   const [gratitudeInput1, setGratitudeInput1] = useState(
@@ -67,6 +72,7 @@ const HomeScreen = () => {
     setRowBtnsValues({...values, userId: userInfo?._id, token});
     // dispatch(rowBtns(rowBtnsValues));
   };
+  console.log('🚀 ~ useEffect ~ rowBtnsValues:', rowBtnsValues);
 
   useEffect(() => {
     if (
@@ -136,7 +142,10 @@ const HomeScreen = () => {
                 </Text>
               </TouchableOpacity>
             ) : null}
-            <RowBtnsHomeScreen onRowBtnsValues={handleRowBtnsValues} />
+            <RowBtnsHomeScreen
+              onRowBtnsValues={handleRowBtnsValues}
+              selectedRowBtnsValues={selectedRowBtnsValues}
+            />
 
             <Text style={[styles.headtext]}>BONUS POINTS</Text>
 

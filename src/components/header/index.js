@@ -36,7 +36,7 @@ const Header = props => {
   const userInfo = useSelector(state => state?.user?.userInfo);
   // const token = useSelector(state => state.token);
   const token = useSelector(state => state?.user?.token);
-  const points = useSelector(state => state?.points?.points);
+  const pointsData = useSelector(state => state?.points?.data);
 
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
@@ -108,7 +108,9 @@ const Header = props => {
             <Text style={[styles.counttext, {fontSize: 16}]}>Home</Text>
             <View style={styles.boderView} />
             <DimondIcon />
-            <Text style={styles.counttext}>{points} Pts</Text>
+            <Text style={styles.counttext}>
+              {pointsData?.totalCompletedPoints} Pts
+            </Text>
 
             <View style={styles.boderView} />
             <FireICon />

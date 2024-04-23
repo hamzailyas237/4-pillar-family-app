@@ -30,7 +30,7 @@ export const fetchPoints = createAsyncThunk('points/fetch', async id => {
   );
   // console.log('pointsData ==> ', pointsData);
   const points = await pointsData.json();
-  console.log('points ==> ', points?.data?.pointsData[0]);
+  // console.log('points ==> ', points?.data?.pointsData[0]);
   return points?.data?.pointsData[0];
 });
 

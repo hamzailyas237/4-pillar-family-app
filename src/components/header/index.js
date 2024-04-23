@@ -114,7 +114,7 @@ const Header = props => {
 
             <View style={styles.boderView} />
             <FireICon />
-            <Text style={styles.counttext}>58</Text>
+            <Text style={styles.counttext}>{pointsData?.streaks}</Text>
             <View style={styles.boderView} />
             <TouchableOpacity onPress={props.imgPress}>
               <Image

@@ -10,6 +10,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Modal from 'react-native-modal';
 import CalendarPicker from 'react-native-calendar-picker';
 import LinearGradient from 'react-native-linear-gradient';
+import {useSelector} from 'react-redux';
 
 const MyStreaks = () => {
   const [calendarModalVisible, setCalanderModalVisible] = useState(false);
@@ -24,6 +25,20 @@ const MyStreaks = () => {
     setStreakDate(formattedDate);
     setCalanderModalVisible(false); // Close the modal after selecting a date
   };
+
+  const streakDates = useSelector(state => state?.points?.data?.streakDates);
+
+  const streakDatesToSet = streakDates?.map((date, i) => {
+    return {
+      date: date.split('T')[0],
+      containerStyle: {
+        backgroundColor: '#FFC727',
+        borderRadius: 50,
+        width: 'auto',
+        marginHorizontal: 5,
+      },
+    };
+  });
 
   useEffect(() => {
     setTimeout(() => {
@@ -139,6 +154,7 @@ const MyStreaks = () => {
           onDateChange={handleDateChange}
           selectMonthTitle="Month"
           selectYearTitle="Year"
+          customDatesStyles={streakDatesToSet}
         />
       </View>
 

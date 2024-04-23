@@ -691,6 +691,11 @@ const authSlice = createSlice({
       state.status = STATUSES.IDLE;
       state.error = null;
     },
+
+    setUser(state, action) {
+      state.loading = false;
+      state.userInfo = action?.payload?.data?.user;
+    },
   },
   extraReducers: builder => {
     // Handle the logout action
@@ -936,6 +941,6 @@ const authSlice = createSlice({
 });
 
 // Export the logout action from your slice
-export const {logoutUser} = authSlice.actions;
+export const {logoutUser, setUser} = authSlice.actions;
 
 export default authSlice.reducer;

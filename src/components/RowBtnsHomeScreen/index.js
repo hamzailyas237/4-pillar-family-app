@@ -62,7 +62,7 @@ const RowBtnsHomeScreen = ({onRowBtnsValues, selectedRowBtnsValues}) => {
               start={{x: 0.2, y: 0.25}}
               end={{x: 0.9, y: 2.0}}
               style={styles.liner}>
-              <TouchableOpacity onPress={() => setRowBtns1(true)}>
+              <TouchableOpacity>
                 <Text
                   style={[
                     styles.text,
@@ -104,7 +104,7 @@ const RowBtnsHomeScreen = ({onRowBtnsValues, selectedRowBtnsValues}) => {
               start={{x: 0.2, y: 0.25}}
               end={{x: 0.9, y: 2.0}}
               style={styles.liner}>
-              <TouchableOpacity onPress={() => setRowBtns2(true)}>
+              <TouchableOpacity>
                 <Text
                   style={[
                     styles.text,
@@ -147,7 +147,7 @@ const RowBtnsHomeScreen = ({onRowBtnsValues, selectedRowBtnsValues}) => {
               start={{x: 0.2, y: 0.25}}
               end={{x: 0.9, y: 2.0}}
               style={styles.liner}>
-              <TouchableOpacity onPress={() => setRowBtns3(true)}>
+              <TouchableOpacity>
                 <Text
                   style={[
                     styles.text,
@@ -192,7 +192,7 @@ const RowBtnsHomeScreen = ({onRowBtnsValues, selectedRowBtnsValues}) => {
               start={{x: 0.2, y: 0.25}}
               end={{x: 0.9, y: 2.0}}
               style={styles.liner}>
-              <TouchableOpacity onPress={() => setRowBtns4(true)}>
+              <TouchableOpacity>
                 <Text
                   style={[
                     styles.text,
@@ -239,7 +239,7 @@ const RowBtnsHomeScreen = ({onRowBtnsValues, selectedRowBtnsValues}) => {
               start={{x: 0.2, y: 0.25}}
               end={{x: 0.9, y: 2.0}}
               style={styles.liner}>
-              <TouchableOpacity onPress={() => setRowBtns5(true)}>
+              <TouchableOpacity>
                 <Text
                   style={[
                     styles.text,
@@ -284,7 +284,7 @@ const RowBtnsHomeScreen = ({onRowBtnsValues, selectedRowBtnsValues}) => {
               start={{x: 0.2, y: 0.25}}
               end={{x: 0.9, y: 2.0}}
               style={styles.liner}>
-              <TouchableOpacity onPress={() => setRowBtns6(true)}>
+              <TouchableOpacity>
                 <Text
                   style={[
                     styles.text,
@@ -331,7 +331,7 @@ const RowBtnsHomeScreen = ({onRowBtnsValues, selectedRowBtnsValues}) => {
               start={{x: 0.2, y: 0.25}}
               end={{x: 0.9, y: 2.0}}
               style={styles.liner}>
-              <TouchableOpacity onPress={() => setRowBtns7(true)}>
+              <TouchableOpacity>
                 <Text
                   style={[
                     styles.text,
@@ -376,7 +376,7 @@ const RowBtnsHomeScreen = ({onRowBtnsValues, selectedRowBtnsValues}) => {
               start={{x: 0.2, y: 0.25}}
               end={{x: 0.9, y: 2.0}}
               style={styles.liner}>
-              <TouchableOpacity onPress={() => setRowBtns8(true)}>
+              <TouchableOpacity>
                 <Text
                   style={[
                     styles.text,

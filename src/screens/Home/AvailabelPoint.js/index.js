@@ -53,33 +53,35 @@ const AvailabelPoint = () => {
   });
 
   const transferPointsHandler = async () => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    const response = await fetch(
-      'https://4-pillar-backend.vercel.app/api/v1/points/transfer-points',
-      {
-        method: 'POST',
-        body: JSON.stringify(transferPointsData),
-        ...config,
-      },
-    );
-    const data = await response.json();
-
-    if (!response.ok) {
-      Toast.error(data?.message);
-    } else {
-      dispatch(fetchPoints(userInfo?._id));
-      dispatch(setUser(data));
-      setModalVisible(true);
-      setTimeout(() => {
-        navigation.navigate('Team');
-      }, 2000);
-    }
+    // const config = {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // };
+    // const response = await fetch(
+    //   'https://4-pillar-backend.vercel.app/api/v1/points/transfer-points',
+    //   {
+    //     method: 'POST',
+    //     body: JSON.stringify(transferPointsData),
+    //     ...config,
+    //   },
+    // );
+    // const data = await response.json();
+    // if (!response.ok) {
+    //   Toast.error(data?.message);
+    // } else {
+    //   dispatch(fetchPoints(userInfo?._id));
+    //   dispatch(setUser(data));
+    //   setModalVisible(true);
+    //   setTimeout(() => {
+    //     navigation.navigate('Team');
+    //   }, 2000);
+    // }
+    setModalVisible(true);
+    setTimeout(() => {
+      navigation.navigate('Team');
+    }, 2000);
   };
 
   return (
@@ -145,7 +147,7 @@ const AvailabelPoint = () => {
                 </TouchableOpacity>
               </View>
 
-              {/* {userInfo?.children?.map((user, i) => {
+              {userInfo?.children?.map((user, i) => {
                 return (
                   <TouchableOpacity
                     key={i}
@@ -203,7 +205,7 @@ const AvailabelPoint = () => {
                     </View>
                   </TouchableOpacity>
                 );
-              })} */}
+              })}
               <Text style={[styles.text, {marginTop: 18}]}>
                 How many coins do you want to give?
               </Text>
@@ -234,7 +236,7 @@ const AvailabelPoint = () => {
                   placeholderTextColor="#fff"
                 />
               </View>
-              {/* <TouchableOpacity onPress={transferPointsHandler}>
+              <TouchableOpacity onPress={transferPointsHandler}>
                 <LinearGradient
                   colors={['#BA5DFE', '#5D36FE']}
                   start={{x: 0.2, y: 0.25}}
@@ -250,7 +252,7 @@ const AvailabelPoint = () => {
                     Transfer Points
                   </Text>
                 </LinearGradient>
-              </TouchableOpacity> */}
+              </TouchableOpacity>
               <Modal
                 isVisible={modalVisible}
                 backdropOpacity={0.5}

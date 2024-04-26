@@ -145,7 +145,7 @@ const AvailabelPoint = () => {
                 </TouchableOpacity>
               </View>
 
-              {userInfo?.children?.map((user, i) => {
+              {/* {userInfo?.children?.map((user, i) => {
                 return (
                   <TouchableOpacity
                     key={i}
@@ -203,7 +203,7 @@ const AvailabelPoint = () => {
                     </View>
                   </TouchableOpacity>
                 );
-              })}
+              })} */}
               <Text style={[styles.text, {marginTop: 18}]}>
                 How many coins do you want to give?
               </Text>
@@ -234,7 +234,7 @@ const AvailabelPoint = () => {
                   placeholderTextColor="#fff"
                 />
               </View>
-              <TouchableOpacity onPress={transferPointsHandler}>
+              {/* <TouchableOpacity onPress={transferPointsHandler}>
                 <LinearGradient
                   colors={['#BA5DFE', '#5D36FE']}
                   start={{x: 0.2, y: 0.25}}
@@ -250,7 +250,7 @@ const AvailabelPoint = () => {
                     Transfer Points
                   </Text>
                 </LinearGradient>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <Modal
                 isVisible={modalVisible}
                 backdropOpacity={0.5}

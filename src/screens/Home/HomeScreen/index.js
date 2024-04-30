@@ -5,6 +5,7 @@ import {
   ScrollView,
   ImageBackground,
   Image,
+  RefreshControl,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -54,6 +55,7 @@ const HomeScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalSec, setModalSec] = useState(false);
   const [getPointsData, setGetPointsData] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [rowBtnsValues, setRowBtnsValues] = useState({
     userId: userInfo?._id,
@@ -94,7 +96,12 @@ const HomeScreen = () => {
   }, [rowBtnsValues, dispatch]);
 
   useEffect(() => {
-    dispatch(fetchPoints(userInfo?._id));
+    setLoading(true);
+    dispatch(fetchPoints(userInfo?._id))
+      .unwrap()
+      .then(res => {
+        setLoading(false);
+      });
   }, [getPointsData]);
 
   useEffect(() => {
@@ -117,7 +124,10 @@ const HomeScreen = () => {
         <ScrollView
           bounces={false}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{flexGrow: 1}}>
+          contentContainerStyle={{flexGrow: 1}}
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={fetchPoints} />
+          }>
           <View style={styles.container}>
             <TouchableOpacity
               onPress={() => navigation.navigate('PointPurchaseScreen')}

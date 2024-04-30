@@ -11,6 +11,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     background: Colors.background.secondary,
+    paddingBottom: 100,
   },
 
   backArrow: {
@@ -111,7 +112,7 @@ export default StyleSheet.create({
     paddingVertical: 16,
     borderRadius: 8,
     alignSelf: 'center',
-    marginTop: 96,
+    marginTop: 20,
   },
 
   modalContainer: {

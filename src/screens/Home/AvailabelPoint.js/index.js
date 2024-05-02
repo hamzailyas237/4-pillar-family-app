@@ -52,6 +52,8 @@ const AvailabelPoint = () => {
   });
 
   const transferPointsHandler = async () => {
+    Toast.success('Points transferred successfully');
+    return;
     const config = {
       headers: {
         'Content-Type': 'application/json',

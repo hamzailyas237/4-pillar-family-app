@@ -145,11 +145,11 @@ const MyStreaks = () => {
           previousTitleStyle={{color: '#000', marginLeft: 12}}
           nextTitle={'Next'}
           nextTitleStyle={{color: '#000', marginRight: 14}}
-          todayBackgroundColor="#5D36FE"
+          todayBackgroundColor="white"
           textStyle={{fontFamily: 'Now-Medium-BF6542f7137648d'}}
           todayTextStyle={{
             fontFamily: 'Now-Bold-BF6542f7138a8d2',
-            color: '#fff',
+            fontWeight: 'bold',
           }}
           onDateChange={handleDateChange}
           selectMonthTitle="Month"

@@ -7,13 +7,15 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const AppRadioButton = props => {
   const lockIcon = require('../../assets/Images/lock.png');
-  const [handleCheck, setHandleCheck] = useState(false);
+  const [handleCheck, setHandleCheck] = useState(props.isChecked);
 
   return (
     <View
       style={{
         justifyContent: 'space-between',
         paddingHorizontal: 5,
+        marginTop: 5,
+        marginBottom: 5,
       }}>
       <TouchableOpacity
         // onPress={onPressbtn}

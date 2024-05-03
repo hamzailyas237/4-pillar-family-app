@@ -25,6 +25,7 @@ import AppRadioButton from '../../../components/RadioButton/AppRadioButton';
 import axios from 'axios';
 import {useSelector} from 'react-redux';
 import {Toast} from 'toastify-react-native';
+import {useDebounce} from '../../../hooks/useDebounce';
 
 const PurposeScreen = ({route}) => {
   const navigation = useNavigation();
@@ -34,8 +35,9 @@ const PurposeScreen = ({route}) => {
   // const { headingText = 'Default Heading', header = false } = params;
   const [affirmation, setAffirmation] = useState('');
   const [affirmations, setAffirmations] = useState([]);
-  const [search, setSearch] = useState('all');
+  const [search, setSearch] = useState('');
   const userId = useSelector(state => state?.user?.userInfo?._id);
+  const debouncedSearch = useDebounce(search, 500);
 
   const createAffirmation = async () => {
     Toast.success('Success');
@@ -62,19 +64,19 @@ const PurposeScreen = ({route}) => {
   const getAffirmations = async () => {
     try {
       const response = await fetch(
-        `https://4-pillar-backend.vercel.app/api/v1/affirmations:/${search}`,
+        // `https://4-pillar-backend.vercel.app/api/v1/affirmations/get-affirmations/:${userId}?search=${search}`,
+        `http://192.168.10.5:3030/api/v1/affirmations/get-affirmations/${userId}?search=${search}`,
       );
-      const data = response.json();
-      console.log(data);
-      // setAffirmations()
+      const {data} = await response.json();
+      setAffirmations(data?.affirmationsData);
     } catch (error) {
       console.log('error', error);
     }
   };
 
-  // useEffect(() => {
-  //     getAffirmations()
-  // },[])
+  useEffect(() => {
+    getAffirmations();
+  }, [debouncedSearch]);
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -186,10 +188,16 @@ const PurposeScreen = ({route}) => {
             )} */}
 
             <View>
-              <AppRadioButton
-                text={'Start your day by waking up at the same'}
-                isChecked={true}
-              />
+              {/* {affirmations?.map((affirmation, i) => {
+                return (
+                  <AppRadioButton
+                    key={affirmation._id}
+                    text={affirmation?.affirmationText}
+                    isChecked={false}
+                  />
+                );
+              })} */}
+
               <AppRadioButton
                 text={'Start your day by waking up at the same'}
                 isChecked={false}

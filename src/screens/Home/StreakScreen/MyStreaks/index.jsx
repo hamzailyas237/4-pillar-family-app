@@ -29,10 +29,12 @@ const MyStreaks = () => {
   const streakDates = useSelector(state => state?.points?.data?.streakDates);
 
   const streakDatesToSet = streakDates?.map((date, i) => {
+    const today = new Date().toISOString().split('T')[0];
     return {
       date: date.split('T')[0],
       containerStyle: {
-        backgroundColor: '#FFC727',
+        // given today bgColor 'none' in calendar picker therefore if i dont give bgColor here than today date will have no bgColor either date is present in streaks history.
+        backgroundColor: today == date.split('T')[0] ? '#FFC727' : '#FFC727',
         borderRadius: 50,
         width: 'auto',
         marginHorizontal: 5,
@@ -145,7 +147,7 @@ const MyStreaks = () => {
           previousTitleStyle={{color: '#000', marginLeft: 12}}
           nextTitle={'Next'}
           nextTitleStyle={{color: '#000', marginRight: 14}}
-          todayBackgroundColor="white"
+          todayBackgroundColor="none"
           textStyle={{fontFamily: 'Now-Medium-BF6542f7137648d'}}
           todayTextStyle={{
             fontFamily: 'Now-Bold-BF6542f7138a8d2',

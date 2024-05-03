@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import {RadioButton} from 'react-native-paper';
 import {Colors} from '../../assets/theme';
@@ -18,8 +18,10 @@ const AppRadioButton = props => {
         marginBottom: 5,
       }}>
       <TouchableOpacity
-        // onPress={onPressbtn}
-        onPress={() => setHandleCheck(!handleCheck)}
+        onPress={() => {
+          setHandleCheck(!handleCheck);
+          props.onPressHandler(props.data?._id);
+        }}
         style={{
           paddingHorizontal: 10,
           height: 46,
@@ -44,8 +46,11 @@ const AppRadioButton = props => {
           </View>
         ) : (
           <RadioButton
-            onPress={() => setHandleCheck(!handleCheck)}
-            value={props.text}
+            onPress={() => {
+              setHandleCheck(!handleCheck);
+              props.onPressHandler(props.data?._id);
+            }}
+            value={props.data?.affirmationText}
             status={handleCheck ? 'checked' : 'unchecked'}
             color={handleCheck ? Colors.text.tertiary : Colors.text.tertiary}
           />
@@ -55,7 +60,7 @@ const AppRadioButton = props => {
             color: handleCheck ? Colors.text.tertiary : Colors.gray11,
             paddingLeft: 15,
           }}>
-          {props.text}
+          {props.data?.affirmationText}
         </Text>
       </TouchableOpacity>
     </View>

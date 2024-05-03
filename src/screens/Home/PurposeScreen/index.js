@@ -64,8 +64,7 @@ const PurposeScreen = ({route}) => {
   const getAffirmations = async () => {
     try {
       const response = await fetch(
-        // `https://4-pillar-backend.vercel.app/api/v1/affirmations/get-affirmations/:${userId}?search=${search}`,
-        `http://192.168.10.5:3030/api/v1/affirmations/get-affirmations/${userId}?search=${search}`,
+        `https://4-pillar-backend.vercel.app/api/v1/affirmations/get-affirmations/${userId}?search=${search}`,
       );
       const {data} = await response.json();
       setAffirmations(data?.affirmationsData);
@@ -74,9 +73,36 @@ const PurposeScreen = ({route}) => {
     }
   };
 
-  useEffect(() => {
-    getAffirmations();
-  }, [debouncedSearch]);
+  // useEffect(() => {
+  //   getAffirmations();
+  // }, [debouncedSearch]);
+
+  const markAffirmationAsCompleted = async id => {
+    Toast.success('Success');
+    return;
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const response = await fetch(
+      'https://4-pillar-backend.vercel.app/api/v1/affirmations/update-affirmationStatus',
+      {
+        method: 'PATCH',
+        body: JSON.stringify({
+          affirmationId: id,
+          status: 'completed',
+        }),
+        ...config,
+      },
+    );
+
+    const {data} = await response.json();
+    const updatedAffirmations = affirmations?.filter(affirmation => {
+      return data?.statusUpdate?._id !== affirmation?._id;
+    });
+    setAffirmations(updatedAffirmations);
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -188,19 +214,25 @@ const PurposeScreen = ({route}) => {
             )} */}
 
             <View>
-              {/* {affirmations?.map((affirmation, i) => {
-                return (
-                  <AppRadioButton
-                    key={affirmation._id}
-                    text={affirmation?.affirmationText}
-                    isChecked={false}
-                  />
-                );
-              })} */}
+              {/* {affirmations
+                ?.filter(affirmation => affirmation?.status == 'pending')
+                .map((affirmation, i) => {
+                  return (
+                    <AppRadioButton
+                      key={affirmation._id}
+                      data={affirmation}
+                      isChecked={false}
+                      onPressHandler={markAffirmationAsCompleted}
+                    />
+                  );
+                })} */}
 
               <AppRadioButton
-                text={'Start your day by waking up at the same'}
+                data={{
+                  affirmationText: 'Start your day by waking up at the same',
+                }}
                 isChecked={false}
+                onPressHandler={() => null}
               />
             </View>
             <View>

@@ -52,7 +52,7 @@ const AvailabelPoint = () => {
   });
 
   const transferPointsHandler = async () => {
-    Toast.success('Points transferred successfully');
+    Toast.error('Someting went wrong');
     return;
     const config = {
       headers: {
@@ -79,10 +79,6 @@ const AvailabelPoint = () => {
         navigation.navigate('Team');
       }, 2000);
     }
-    setModalVisible(true);
-    setTimeout(() => {
-      navigation.navigate('Team');
-    }, 2000);
   };
 
   return (

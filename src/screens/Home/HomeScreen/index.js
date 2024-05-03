@@ -340,8 +340,11 @@ const HomeScreen = () => {
 
             <View style={{marginTop: 5, marginBottom: 5}}>
               <AppRadioButton
-                text={'Start your day by waking up at the same'}
+                data={{
+                  affirmationText: 'Start your day by waking up at the same',
+                }}
                 isChecked={true}
+                onPressHandler={() => null}
                 // radioType="completed"
               />
             </View>

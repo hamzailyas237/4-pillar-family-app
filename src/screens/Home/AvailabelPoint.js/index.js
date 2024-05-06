@@ -52,8 +52,6 @@ const AvailabelPoint = () => {
   });
 
   const transferPointsHandler = async () => {
-    Toast.error('Someting went wrong');
-    return;
     const config = {
       headers: {
         'Content-Type': 'application/json',

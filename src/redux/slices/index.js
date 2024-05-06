@@ -146,7 +146,8 @@ export const signupUser = createAsyncThunk(
       }
     } else {
       //  console.log('Registration successful');
-      navigation.navigate('Login');
+      // navigation.navigate('Login');
+      navigation.navigate('Onboarding');
       Toast.success(data?.message);
       return data;
     }

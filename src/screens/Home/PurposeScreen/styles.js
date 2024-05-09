@@ -116,7 +116,16 @@ export default StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginHorizontal: 10,
+    marginTop: 10,
+  },
+  label: {
+    paddingLeft: 5,
+    fontSize: 16,
+    fontFamily: 'Now-Regular-BF6542f7138c477',
+    color: Colors.white,
+    marginHorizontal: 10,
     marginTop: 20,
+    
   },
   linear: {
     width: '95%',

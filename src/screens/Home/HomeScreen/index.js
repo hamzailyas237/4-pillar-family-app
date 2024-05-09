@@ -325,7 +325,7 @@ const HomeScreen = () => {
               <Text
                 onPress={() => navigation.navigate('Affirmations')}
                 style={[styles.seealltext]}>
-                See All
+               Add & See All
               </Text>
             </View>
 

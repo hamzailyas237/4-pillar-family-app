@@ -23,9 +23,10 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import LinearGradient from 'react-native-linear-gradient';
 import AppRadioButton from '../../../components/RadioButton/AppRadioButton';
 import axios from 'axios';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Toast} from 'toastify-react-native';
 import {useDebounce} from '../../../hooks/useDebounce';
+import { fetchPoints } from '../../../redux/slices/PointsAndStreaksSlice';
 
 const PurposeScreen = ({route}) => {
   const navigation = useNavigation();
@@ -38,14 +39,9 @@ const PurposeScreen = ({route}) => {
   const [search, setSearch] = useState('');
   const userId = useSelector(state => state?.user?.userInfo?._id);
   const debouncedSearch = useDebounce(search, 500);
-
+  const dispatch = useDispatch()
+  
   const createAffirmation = async () => {
-    Toast.success('Success');
-    return;
-    console.log({
-      userId,
-      affirmationText: affirmation,
-    });
     try {
       const response = await axios.post(
         'https://4-pillar-backend.vercel.app/api/v1/affirmations/create-affirmation',
@@ -54,10 +50,12 @@ const PurposeScreen = ({route}) => {
           affirmationText: affirmation,
         },
       );
-      console.log('data', response?.data);
-      // setAffirmations()
+      Toast.success(response?.data?.message)
+      setAffirmations([...affirmations, response?.data?.data])
+      setAffirmation('')
     } catch (error) {
       console.log('error', error);
+      Toast.error(error.message)
     }
   };
 
@@ -69,17 +67,15 @@ const PurposeScreen = ({route}) => {
       const {data} = await response.json();
       setAffirmations(data?.affirmationsData);
     } catch (error) {
-      console.log('error', error);
+      console.log('error', error?.response?.data?.message);
     }
   };
 
-  // useEffect(() => {
-  //   getAffirmations();
-  // }, [debouncedSearch]);
+  useEffect(() => {
+    getAffirmations();
+  }, [debouncedSearch]);
 
   const markAffirmationAsCompleted = async id => {
-    Toast.success('Success');
-    return;
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -92,6 +88,7 @@ const PurposeScreen = ({route}) => {
         body: JSON.stringify({
           affirmationId: id,
           status: 'completed',
+          userId
         }),
         ...config,
       },
@@ -102,7 +99,11 @@ const PurposeScreen = ({route}) => {
       return data?.statusUpdate?._id !== affirmation?._id;
     });
     setAffirmations(updatedAffirmations);
+    dispatch(fetchPoints(userId))
+
   };
+
+
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -214,7 +215,7 @@ const PurposeScreen = ({route}) => {
             )} */}
 
             <View>
-              {/* {affirmations
+             {affirmations
                 ?.filter(affirmation => affirmation?.status == 'pending')
                 .map((affirmation, i) => {
                   return (
@@ -225,17 +226,10 @@ const PurposeScreen = ({route}) => {
                       onPressHandler={markAffirmationAsCompleted}
                     />
                   );
-                })} */}
-
-              <AppRadioButton
-                data={{
-                  affirmationText: 'Start your day by waking up at the same',
-                }}
-                isChecked={false}
-                onPressHandler={() => null}
-              />
+                })} 
             </View>
             <View>
+              <Text style={styles.label}>Maximum 35 characters</Text>
               <TextInput
                 style={styles.addInputField}
                 placeholder="Type something..."
@@ -246,6 +240,7 @@ const PurposeScreen = ({route}) => {
                 type="input"
                 name="input"
                 id="input"
+                maxLength={35}
               />
 
               <TouchableOpacity onPress={() => createAffirmation()}>

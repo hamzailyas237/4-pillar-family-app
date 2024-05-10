@@ -75,7 +75,7 @@ const PurposeScreen = ({route}) => {
     getAffirmations();
   }, [debouncedSearch]);
 
-  const markAffirmationAsCompleted = async id => {
+  const markAffirmationAsTransferred = async id => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ const PurposeScreen = ({route}) => {
         method: 'PATCH',
         body: JSON.stringify({
           affirmationId: id,
-          status: 'completed',
+          status: 'transfer',
           userId
         }),
         ...config,
@@ -102,7 +102,6 @@ const PurposeScreen = ({route}) => {
     dispatch(fetchPoints(userId))
 
   };
-
 
 
   return (
@@ -215,15 +214,14 @@ const PurposeScreen = ({route}) => {
             )} */}
 
             <View>
-             {affirmations
-                ?.filter(affirmation => affirmation?.status == 'pending')
+             {affirmations?.filter(affirmation => affirmation?.status == 'pending')
                 .map((affirmation, i) => {
                   return (
                     <AppRadioButton
                       key={affirmation._id}
                       data={affirmation}
                       isChecked={false}
-                      onPressHandler={markAffirmationAsCompleted}
+                      onPressHandler={markAffirmationAsTransferred}
                     />
                   );
                 })} 

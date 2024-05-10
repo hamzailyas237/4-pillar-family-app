@@ -42,10 +42,10 @@ const HomeScreen = () => {
   // const token = useSelector(state => state.token);
   const token = useSelector(state => state?.user?.token);
   const selectedRowBtnsValues = useSelector(state => state?.points?.data);
-  console.log(
-    '🚀 ~ HomeScreen ~ selectedRowBtnsValues:',
-    selectedRowBtnsValues,
-  );
+  // console.log(
+  //   '🚀 ~ HomeScreen ~ selectedRowBtnsValues:',
+  //   selectedRowBtnsValues,
+  // );
 
   const dispatch = useDispatch();
   const [gratitudeInput1, setGratitudeInput1] = useState(
@@ -69,12 +69,13 @@ const HomeScreen = () => {
     education: false,
     goals: false,
   });
+  const [affirmations, setAffirmations] = useState([]);
 
   const handleRowBtnsValues = values => {
     setRowBtnsValues({...values, userId: userInfo?._id, token});
     // dispatch(rowBtns(rowBtnsValues));
   };
-  console.log('🚀 ~ useEffect ~ rowBtnsValues:', rowBtnsValues);
+  // console.log('🚀 ~ useEffect ~ rowBtnsValues:', rowBtnsValues);
 
   useEffect(() => {
     if (
@@ -111,6 +112,59 @@ const HomeScreen = () => {
   const toggleModalSec = () => {
     setModalVisible(false);
     setModalSec(false);
+  };
+
+  const getAffirmations = async () => {
+    try {
+      const response = await fetch(
+        `https://4-pillar-backend.vercel.app/api/v1/affirmations/get-affirmations/${
+          userInfo?._id
+        }?search=${''}`,
+      );
+      const {data} = await response.json();
+      setAffirmations(data?.affirmationsData);
+    } catch (error) {
+      console.log('error', error?.response?.data?.message);
+    }
+  };
+
+  useEffect(() => {
+    getAffirmations();
+  }, []);
+
+  const markAffirmationAsCompleted = async id => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const response = await fetch(
+      'https://4-pillar-backend.vercel.app/api/v1/affirmations/update-affirmationStatus',
+      {
+        method: 'PATCH',
+        body: JSON.stringify({
+          affirmationId: id,
+          status: 'completed',
+          userId: userInfo?._id,
+        }),
+        ...config,
+      },
+    );
+
+    const {data} = await response.json();
+
+    const updatedAffirmations = affirmations.map(affirmation => {
+      if (data?.statusUpdate?._id === affirmation?._id) {
+        return {
+          ...affirmation,
+          status: 'completed',
+        };
+      } else {
+        return affirmation;
+      }
+    });
+    setAffirmations(updatedAffirmations);
+    dispatch(fetchPoints(userInfo?._id));
   };
 
   return (
@@ -325,7 +379,7 @@ const HomeScreen = () => {
               <Text
                 onPress={() => navigation.navigate('Affirmations')}
                 style={[styles.seealltext]}>
-               Add & See All
+                Add & See All
               </Text>
             </View>
 
@@ -339,14 +393,27 @@ const HomeScreen = () => {
             </View>
 
             <View style={{marginTop: 5, marginBottom: 5}}>
-              <AppRadioButton
+              {/* <AppRadioButton
                 data={{
                   affirmationText: 'Start your day by waking up at the same',
                 }}
                 isChecked={true}
                 onPressHandler={() => null}
                 // radioType="completed"
-              />
+              /> */}
+
+              {affirmations
+                ?.filter(affirmation => affirmation?.status == 'transfer')
+                .map((affirmation, i) => {
+                  return (
+                    <AppRadioButton
+                      key={affirmation._id}
+                      data={affirmation}
+                      isChecked={false}
+                      onPressHandler={markAffirmationAsCompleted}
+                    />
+                  );
+                })}
             </View>
 
             <View style={styles.textView}>
@@ -365,7 +432,7 @@ const HomeScreen = () => {
             </View>
 
             <View>
-              <Radiobtns
+              {/* <Radiobtns
                 onPressbtn={() => setVisible(!visible)}
                 btn
                 btn1
@@ -373,7 +440,22 @@ const HomeScreen = () => {
                 backgroundColor={Colors.shadow1}
                 Easy="Start your day by waking up at the same"
                 Medium="Start your day by waking up at the same"
-              />
+              /> */}
+
+              {affirmations
+                ?.filter(affirmation => affirmation?.status == 'completed')
+                ?.slice(0, 2)
+                ?.map((affirmation, i) => {
+                  return (
+                    <AppRadioButton
+                      key={affirmation._id}
+                      data={affirmation}
+                      isChecked={false}
+                      onPressHandler={() => null}
+                      radioType="completed"
+                    />
+                  );
+                })}
             </View>
             <View style={{marginTop: 10}} />
             <View></View>
